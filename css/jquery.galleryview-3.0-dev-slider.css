@@ -42,24 +42,6 @@
 .gv_overlay h4 { color: white; margin: 1em; font-weight: bold; }
 .gv_overlay p { color: white; margin: 1em; }
 
-.gv_infobar {
-	background: #222;
-	padding: 0 0.5em;
-	line-height: 1.5em;
-	height: 1.5em;
-	font-size: 10pt;
-	font-weight: bold;
-	color: white;
-	
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	display: none;
-	vertical-align: middle;
-	z-index: 2000;
-	
-}
-
 
 /*************************************************/
 /**   FILMSTRIP STYLES							**/

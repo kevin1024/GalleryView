@@ -83,7 +83,7 @@ if (typeof Object.create !== 'function') {
         // array of dom elements
         elems: [
             '.gv_galleryWrap',    '.gv_gallery',        '.gv_panelWrap',        '.gv_panel',
-            'img.gv_image',        '.gv_infobar',        '.gv_filmstripWrap',    '.gv_filmstrip',
+            'img.gv_image',       '.gv_filmstripWrap',    '.gv_filmstrip',
             '.gv_frame',        '.gv_thumbnail',     '.gv_caption',             'img.gv_thumb',
             '.gv_navWrap',        '.gv_navNext',        '.gv_navPrev',            '.gv_navPlay',
             '.gv_panelNavNext',    '.gv_panelNavPrev',    '.gv_overlay',            '.gv_showOverlay'
@@ -411,18 +411,6 @@ if (typeof Object.create !== 'function') {
             }
         },
         
-        showInfoBar: function() {
-            if(!this.opts.show_infobar) { return; }
-            var self = this,
-                dom = this.dom;
-            
-            dom.gv_infobar.stop().stopTime('hideInfoBar_' + self.id).html((this.iterator+1) + ' of ' + this.numImages).show().css('opacity',1);
-            
-            dom.gv_infobar.oneTime(2000 + this.opts.transition_speed,'hideInfoBar_' + self.id,function() {
-                    dom.gv_infobar.fadeOut(1000);
-                });
-        },
-        
         initImages: function() {
             var self = this,
                 dom = this.dom;
@@ -461,7 +449,6 @@ if (typeof Object.create !== 'function') {
                         parent.prependTo(dom.gv_panelWrap);
                         parent.removeClass('gv_panel-loading');
                         _img.fadeIn();
-                        self.showInfoBar();
                     } else {
                         parent.removeClass('gv_panel-loading');
                         _img.show();
@@ -566,7 +553,6 @@ if (typeof Object.create !== 'function') {
             
             this.iterator = i;
             this.updateFilmstrip(frame_i);
-            this.showInfoBar();
             
             
         },
@@ -846,8 +832,7 @@ if (typeof Object.create !== 'function') {
                 dom.gv_gallery.append(
                     dom.gv_panelWrap.append(
                         dom.gv_panelNavNext,
-                        dom.gv_panelNavPrev,
-                        dom.gv_infobar
+                        dom.gv_panelNavPrev
                     )
                 );
             }
@@ -952,9 +937,5 @@ if (typeof Object.create !== 'function') {
         frame_opacity: 0.4,             //FLOAT - transparency of non-active frames (1.0 = opaque, 0.0 = transparent)
         frame_scale: 'crop',             //STRING - cropping option for filmstrip images (same as above)
         frame_gap: 5,                     //INT - spacing between frames within filmstrip (in pixels)
-        
-        // Info Bar Options
-        show_infobar: true,                //BOOLEAN - flag to show or hide infobar
-        infobar_opacity: 1                //FLOAT - transparency for info bar
     };
 })(jQuery);
