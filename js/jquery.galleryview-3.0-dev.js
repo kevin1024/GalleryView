@@ -723,48 +723,6 @@ if (typeof Object.create !== 'function') {
 			dom.gv_galleryWrap.stopTime('slideshow_'+this.id);
 		},
 		
-		enablePanning: function() {
-			var self = this,
-				dom = this.dom;
-				
-			dom.gv_panel.css('cursor','url(http://www.google.com/intl/en_ALL/mapfiles/openhand.cur), n-resize');
-			if(this.opts.pan_style === 'drag') {
-				dom.gv_panelWrap.delegate('.gv_panel img','mousedown.galleryview',function(e) {
-					self.isMouseDown = true;
-					$(this).css('cursor','url(http://www.google.com/intl/en_ALL/mapfiles/closedhand.cur), n-resize');
-				}).delegate('.gv_panel img','mouseup.galleryview',function(e) {
-					self.isMouseDown = false;
-					$(this).css('cursor','url(http://www.google.com/intl/en_ALL/mapfiles/openhand.cur), n-resize');
-				}).delegate('.gv_panel img','mousemove.galleryview',function(e) {
-					var distY, distX,
-						image = $(this),
-						new_top, new_left;
-
-					if(self.isMouseDown) {
-						distY = e.pageY - self.mouse.y;
-						distX = e.pageX - self.mouse.x;
-						new_top = gv.getInt(image.css('top')) + distY;
-						new_left = gv.getInt(image.css('left')) + distX;
-							
-						image.css('cursor','url(http://www.google.com/intl/en_ALL/mapfiles/closedhand.cur), n-resize');
-						
-						if(new_top > 0) new_top = 0;
-						if(new_left > 0) new_left = 0;
-						
-						if(new_top < (-1 * (gv.outerHeight(image) - gv.innerHeight(dom.gv_panel)))) { new_top = -1 * (gv.outerHeight(image) - gv.innerHeight(dom.gv_panel)); }
-						if(new_left < (-1 * (gv.outerWidth(image) - gv.innerWidth(dom.gv_panel)))) { new_left = -1 * (gv.outerWidth(image) - gv.innerWidth(dom.gv_panel)); }
-						
-						image.css('top',new_top);
-						image.css('left',new_left);
-					} else {
-						image.css('cursor','url(http://www.google.com/intl/en_ALL/mapfiles/openhand.cur), n-resize');	
-					}
-				});
-			} else {
-				
-			}
-		},
-		
 		bindActions: function() {
 			var self = this,
 				dom = this.dom;
@@ -923,10 +881,6 @@ if (typeof Object.create !== 'function') {
 			//swap out source element with gallery
 			this.$el.replaceWith(dom.gv_galleryWrap);
 			
-			if(this.opts.pan_images) {
-				this.enablePanning();
-			}
-			
 			// convert source images into gvImage objects
 			this.storeImages();
 			
@@ -984,9 +938,6 @@ if (typeof Object.create !== 'function') {
 		panel_scale: 'crop', 			//STRING - cropping option for panel images (crop = scale image and fit to aspect ratio determined by panel_width and panel_height, fit = scale image and preserve original aspect ratio)
 		overlay_opacity: 0.8, 			//FLOAT - transparency for panel overlay (1.0 = opaque, 0.0 = transparent)
 		overlay_position: 'bottom', 	//STRING - position of panel overlay (bottom, top)
-		pan_images: false,				//BOOLEAN - flag to allow user to grab/drag oversized images within gallery
-		pan_style: 'drag',				//STRING - panning method (drag = user clicks and drags image to pan, track = image automatically pans based on mouse position
-		pan_smoothness: 15,				//INT - determines smoothness of tracking pan animation (higher number = smoother)
 		
 		// Filmstrip Options
 		start_frame: 1, 				//INT - index of panel/frame to show first when gallery loads
