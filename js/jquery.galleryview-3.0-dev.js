@@ -2,7 +2,7 @@
 
     GalleryView - jQuery Content Gallery Plugin
     Author:        Jack Anderson
-    Version:    3.0 DEVELOPMENT
+    Version:    3.0 DEVELOPMENT (hacked by kevin1024)
 
       See README.txt for instructions on how to markup your HTML
 */
@@ -393,16 +393,23 @@ if (typeof Object.create !== 'function') {
 
         initImages: function() {
             var self = this,
-                dom = this.dom;
+                dom = this.dom,
+                size_map = {};
 
             $.each(this.gvImages,function(i,gvImage) {
                 var img = $('<img/>');
                 img.hide().data('index',i);
                 img.bind('load.galleryview',function() {
+                    if ($(this).width() || this.width) {
+                        size_map[$(this).attr('src')] = [$(this).width()||this.width,$(this).height()||this.height];
+                    }
+                    if (typeof(size_map[$(this).attr('src')]) === 'undefined') {
+                        return;
+                    }
                     var _img = $(this),
                         index = _img.data('index'),
-                        width = this.width,
-                        height = this.height,
+                        width = size_map[$(this).attr('src')][0],
+                        height = size_map[$(this).attr('src')][1],
                         parent = _img.parent(),
                         widthFactor = gv.innerWidth(parent) / width,
                         heightFactor = gv.innerHeight(parent) / height,
