@@ -535,12 +535,12 @@ if (typeof Object.create !== 'function') {
                     
                     panel.css({ left:newPanelStart }).appendTo(dom.gv_panelWrap).animate(
                         { left:0 },
-                        { duration: this.opts.transition_speed,easing: this.opts.easing }
+                        { duration: this.opts.transition_speed,easing: 'swing' }
                     );
                     
                     dom.gv_panels.eq(this.iterator).animate(
                         { left: oldPanelEnd },
-                        { duration: this.opts.transition_speed, easing: this.opts.easing, complete: function(){ $(this).remove(); } }
+                        { duration: this.opts.transition_speed, easing: 'swing', complete: function(){ $(this).remove(); } }
                     );
                     break;
                 default:
@@ -649,7 +649,7 @@ if (typeof Object.create !== 'function') {
                         left: distance
                     },{
                         duration: this.opts.transition_speed, 
-                        easing: this.opts.easing, 
+                        easing: 'swing', 
                         complete: function(){
                             if(to < self.numImages) {
                                 dom.gv_filmstrip.css('left',gv.getInt(dom.gv_filmstrip.css('left'))-(self.numImages*(gv.outerWidth(dom.gv_frame)+self.opts.frame_gap)));    
@@ -671,7 +671,7 @@ if (typeof Object.create !== 'function') {
                         top: distance
                     },{
                         duration: this.opts.transition_speed, 
-                        easing: this.opts.easing, 
+                        easing: 'swing', 
                         complete: function(){
                             // adjust filmstrip position to ensure that there is always at least one frame behind
                             // and (2 * filmstripSize) ahead
@@ -907,12 +907,11 @@ if (typeof Object.create !== 'function') {
             Object literal storing default plugin options
     */
     $.fn.galleryView.defaults = {
-    
+
         // General Options
         transition_speed: 1000,         //INT - duration of panel/frame transition (in milliseconds)
         transition_interval: 4000,         //INT - delay between panel/frame transitions (in milliseconds)
-        easing: 'swing',                 //STRING - easing method to use for animations (jQuery provides 'swing' or 'linear', more available with jQuery UI or Easing plugin)
-        
+
         // Panel Options
         show_panels: true,                 //BOOLEAN - flag to show or hide panel portion of gallery
         show_panel_nav: true,             //BOOLEAN - flag to show or hide panel navigation buttons
@@ -923,7 +922,7 @@ if (typeof Object.create !== 'function') {
         panel_scale: 'crop',             //STRING - cropping option for panel images (crop = scale image and fit to aspect ratio determined by panel_width and panel_height, fit = scale image and preserve original aspect ratio)
         overlay_opacity: 0.8,             //FLOAT - transparency for panel overlay (1.0 = opaque, 0.0 = transparent)
         overlay_position: 'bottom',     //STRING - position of panel overlay (bottom, top)
-        
+
         // Filmstrip Options
         start_frame: 1,                 //INT - index of panel/frame to show first when gallery loads
         show_filmstrip: true,             //BOOLEAN - flag to show or hide filmstrip portion of gallery
