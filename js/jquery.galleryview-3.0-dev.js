@@ -126,27 +126,7 @@ if (typeof Object.create !== 'function') {
             }
         },
 
-        mouseIsOverGallery: function (x, y) {
-            var self = this,
-                dom = this.dom,
-                pos = this.getPos(dom.gv_galleryWrap),
-                top = pos.top,
-                left = pos.left;
-                
-            return x > left && x < left + gv.outerWidth(dom.gv_galleryWrap) && y > top && y < top + gv.outerHeight(dom.gv_galleryWrap);
-        },
 
-        mouseIsOverPanel: function (x, y) {
-            var self = this,
-                dom = this.dom,
-                pos = this.getPos(dom.gv_panelWrap),
-                gPos = this.getPos(dom.gv_galleryWrap),
-                top = pos.top + gPos.top,
-                left = pos.left + gPos.left;
-                
-            return x > left && x < left + gv.outerWidth(dom.gv_panelWrap) && y > top && y < top + gv.outerHeight(dom.gv_panelWrap);
-        },
-        
         // create gvImage objects for each image in gallery
         storeImages: function() {
             var self = this;
@@ -157,7 +137,7 @@ if (typeof Object.create !== 'function') {
                 self.gvImages[i] = new gvImage($(img));
             });
         },
-        
+
         setDimensions: function() {
             var self = this,
                 dom = this.dom,
