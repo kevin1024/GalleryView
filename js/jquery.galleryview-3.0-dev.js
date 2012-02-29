@@ -914,6 +914,6 @@ if (typeof Object.create !== 'function') {
         frame_height: 40,                 //INT - width of filmstrip frames (in pixels)
         frame_opacity: 0.4,             //FLOAT - transparency of non-active frames (1.0 = opaque, 0.0 = transparent)
         frame_scale: 'crop',             //STRING - cropping option for filmstrip images (same as above)
-        frame_gap: 5,                     //INT - spacing between frames within filmstrip (in pixels)
+        frame_gap: 5                     //INT - spacing between frames within filmstrip (in pixels)
     };
 })(jQuery);
