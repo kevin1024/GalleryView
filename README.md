@@ -1,3 +1,8 @@
+#Don't use this!
+It looks like Jack may have fixed the bugs  originally created this fork to fix.  Go here for a more up-to-date version:
+https://github.com/jackwanders/GalleryView
+
+
 GalleryView - jQuery Photo Gallery Plugin
 -----------------------------------------
 
